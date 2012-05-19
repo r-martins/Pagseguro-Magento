@@ -1,0 +1,123 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * PagSeguro Payment Module
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ *
+ * @category   payment
+ * @package    BrunoAssarisse_PagSeguro
+ * @copyright  Copyright (c) 2010 Bruno Assarisse (www.assarisse.com.br)
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @author     Bruno Assarisse <bruno@assarisse.com.br>
+ */
+-->
+
+<config>
+    <modules>
+        <BrunoAssarisse_PagSeguro>
+            <version>1.1.5</version>          
+        </BrunoAssarisse_PagSeguro>
+    </modules>
+    <global>
+        <models>
+            <brunoassarisse_pagseguro>
+                <class>BrunoAssarisse_PagSeguro_Model</class>
+            </brunoassarisse_pagseguro>
+        </models>
+        <resources>
+            <brunoassarisse_pagseguro_setup>
+                <setup>
+                    <module>BrunoAssarisse_PagSeguro</module>
+                    <class>Mage_Sales_Model_Mysql4_Setup</class>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </brunoassarisse_pagseguro_setup>
+            <brunoassarisse_pagseguro_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </brunoassarisse_pagseguro_write>
+            <brunoassarisse_pagseguro_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </brunoassarisse_pagseguro_read>
+        </resources>
+        <helpers>
+            <brunoassarisse_pagseguro>
+                <class>BrunoAssarisse_PagSeguro_Helper</class>
+            </brunoassarisse_pagseguro>
+        </helpers>
+        <blocks>
+            <brunoassarisse_pagseguro>
+                <class>BrunoAssarisse_PagSeguro_Block</class>
+            </brunoassarisse_pagseguro>
+        </blocks>
+    </global>
+    <frontend>      
+        <routers>
+            <brunoassarisse_pagseguro>
+                <use>standard</use>
+                <args>
+                    <module>BrunoAssarisse_PagSeguro</module>
+                    <frontName>pagseguro</frontName>
+                </args>
+            </brunoassarisse_pagseguro>
+        </routers>
+        <translate>
+            <modules>
+                <brunoassarisse_pagseguro>
+                    <files>
+                        <default>brunoassarisse_pagseguro.csv</default>
+                    </files>
+                </brunoassarisse_pagseguro>
+            </modules>
+        </translate>
+        <layout>
+            <updates>
+                <brunoassarisse_pagseguro>
+                    <file>brunoassarisse_pagseguro.xml</file>
+                </brunoassarisse_pagseguro>
+            </updates>
+        </layout>
+    </frontend>
+    <adminhtml>
+        <translate>
+            <modules>
+                <brunoassarisse_pagseguro>
+                    <files>
+                        <default>brunoassarisse_pagseguro.csv</default>
+                    </files>
+                </brunoassarisse_pagseguro>
+            </modules>
+        </translate>        
+    </adminhtml>
+
+    <default>
+         <payment>
+             <brunoassarisse_pagseguro>
+                  <model>BrunoAssarisse_PagSeguro_Model_Payment</model>
+                  <active>0</active>
+                  <title>PagSeguro</title>
+                  <order_status>pending</order_status>
+                  <custom_address_model>0</custom_address_model>
+                  <msg_add>Você será redirecionado ao PagSeguro após a confirmação do pedido.</msg_add>
+                  <installments_show>0</installments_show>
+                  <installments_add>0</installments_add>
+                  <installments_upfront>0</installments_upfront>
+                  <price_grouping>0</price_grouping>
+                  <shipping_price>separated</shipping_price>
+                  <use_return_page_cms>0</use_return_page_cms>
+                  <use_curl>1</use_curl>        
+                  <allowspecific>0</allowspecific>                  
+            </brunoassarisse_pagseguro>
+        </payment>
+    </default>
+</config>

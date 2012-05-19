@@ -1,0 +1,186 @@
+==============================================
+==============================================
+Módulo de pagamento para Magento - PagSeguro
+BrunoAssarisse_PagSeguro - v1.1.5
+==============================================
+==============================================
+
+por:
+Bruno Assarisse (bruno@assarisse.com.br)
+www.assarisse.com.br
+
+Todo feedback será muito apreciado! =D
+Antes de colocar o módulo em ambiente de produção, teste-o minuciosamente.
+Em caso de dúvidas, utilize o Forum do Magento, em http://www.magentocommerce.com/boards, ou a página do módulo, http://www.assarisse.com.br/modulo-pagseguro-para-magento/.
+
+
+
+==============================================
+INSTALAÇÃO E CONFIGURAÇÕES
+==============================================
+
+Acesse a página http://www.assarisse.com.br/modulo-pagseguro-para-magento/.
+
+
+
+==============================================
+CHANGELOG
+==============================================
+
+BrunoAssarisse_PagSeguro - v1.1.5
+06/10/2010:
+- Adição de verificações no retorno automático de dados e mensagens extras de log
+- Inclusão de mensagem para caso de devolução de dinheiro através do PagSeguro
+
+BrunoAssarisse_PagSeguro - v1.1.4
+30/09/2010:
+- Correção de erro em servidores que não possuem a biblioteca BC Math do PHP
+
+BrunoAssarisse_PagSeguro - v1.1.3
+29/09/2010:
+- Pedido com produtos para download mudam a situação para "Completo" quando o pagamento é confirmado, ao invés de "Processando" (*11)
+- Adicionado limite de caracteres no envio dos nomes dos produtos ao PagSeguro (*12)
+- Correção do problema no envio de descontos ao PagSeguro, no Magento 1.3
+
+BrunoAssarisse_PagSeguro - v1.1.2
+17/08/2010:
+- Adição de verificação de status de pedido no redirecionamento: se o pedido estiver pendente, direciona ao pagamento; se o boleto bancário tiver sido selecionado, mas o pagamento não tiver sido confirmado, exibe este para impressão; em todas as outras situações, direciona para a página de visualização do pedido (*10)
+- Correção do encoding na obtenção da forma de pagamento do PagSeguro
+
+BrunoAssarisse_PagSeguro - v1.1.1
+11/08/2010:
+- Correção de erro no checkout devido a variável inválida
+
+BrunoAssarisse_PagSeguro - v1.1.0
+10/08/2010:
+- Inclusão de arquivos e orientações para exibição do parcelamento nas páginas de listagem e visualização de produtos (exceto para produtos agrupados) (*8)
+- Correção no envio do preço de pacotes de produtos ao PagSeguro (bundled)
+- Exibição do ID da transação do PagSeguro na página de sucesso
+
+BrunoAssarisse_PagSeguro - v1.0.4
+06/08/2010:
+- Correção de erro ao criar Widgets, através da criação da classe Helper (*9)
+
+BrunoAssarisse_PagSeguro - v1.0.3
+04/08/2010:
+- Correção de erro ao utilizar exibição do desconto à vista (*8)
+
+BrunoAssarisse_PagSeguro - v1.0.2
+30/07/2010:
+- Alteração de método na página de sucesso para compatibilidade com Magento 1.4.0.1
+
+BrunoAssarisse_PagSeguro - v1.0.1
+28/07/2010:
+- Adição de método na página de sucesso para compatibilidade com Magento 1.3
+
+BrunoAssarisse_PagSeguro - v1.0.0
+27/07/2010:
+- Inclusão do módulo no Magento Connect
+- Reestruturação/reescrita do módulo a fim de diferenciá-lo do módulo da Visie e permitir instalação paralela de ambos
+- Escolha de página de sucesso do tema, com ID do pedido pago, ou uma dentre as páginas criadas no CMS
+- Exibição das opçÕes de parcelamento na escolha do método de pagamento
+- Escolha de modelo de endereço
+- Melhorias nos códigos de alteração do status do pedido
+- Melhoria na página de redirecionamento ao PagSeguro
+- Remoção de agrupamento de produtos por quantidade
+- Todos os blocos personalizados do módulo agora possuem arquivos phtml próprios, inclusive para a área administrativa
+- Mensagem de aviso sobre redirecionamento agora está contida na mensagem adicional, podendo assim ser facilmente removida
+- Uso do Zend_Http_Client na confirmação do retorno automático de dados do PagSeguro, com escolha da forma de conexão através da administração
+- Alterada a URL de retorno automático e redirecionamento
+- Remoção do arquivo phtml da página de visualização de pedido
+- Remoção dos arquivos de tradução
+
+15/07/2010:
+- Melhoria no código de criação de fatura (*7)
+- Reescrita parcial em algumas funções
+
+13/07/2010:
+- Gravação do ID da transação PagSeguro e da forma de pagamento selecionada, com exibição destas informações na página de visualização de pedidos
+- Emissão de segunda via de boleto através da página do pedido
+- Adição de link para pagamento no bloco de informações de pagamento, na página de visualização do pedido
+- Melhoria no código de confirmação do retorno automático
+- Mais melhorias no código de cancelamento
+- Atualização das instruções de instalação
+
+08/07/2010:
+- Correção no envio do email do cliente para o PagSeguro, em compras de visitantes (guest)
+- Adição de comentários dos campos da administração
+
+05/07/2010:
+- Utilização do campo "extras" para envio de desconto quando nenhum agrupamento de produtos é selecionado (*6)
+
+31/05/2010:
+- Adição de escolha de agrupamento para envio dos itens ao PagSeguro
+- Adição de escolha da forma de exibição do frete ao enviar ao PagSeguro
+
+20/05/2010:
+- Correção na codificação de alguns arquivos
+- Reestruturação do código do botão de pagamento, para mais fácil adaptação a outros layouts
+- Melhoria na estilização da mensagem de redirecionamento ao PagSeguro
+
+19/05/2010:
+- Melhoria no código de cancelamento
+
+12/05/2010:
+- Correção do erro na venda de produtos para download: neste caso, agora é enviado o endereço de cobrança para o PagSeguro (*4)
+- Alteração para que administradores possam selecionar o método de pagamento ao criar uma compra (*5)
+- Limpeza de códigos e melhoria de documentação/comentários dos mesmos
+
+06/05/2010:
+- Alteração na URL de redirecionamento ao PagSeguro e funções pertinentes, para maior assimilação aos padrões do Magento
+
+04/05/2010:
+- Reescrita do código de cancelamento para não incluir comentários inúteis no pedido
+- Reescrita do código de atualização de status do pedido para melhor funcionamento
+
+29/04/2010:
+- Adição do envio de taxas para o PagSeguro
+
+24/04/2010:
+- Implementação de armazenamento de log do retorno automático através da funcionalidade do Magento
+- Adição de campo para mensagem extra no momento da escolha do método de pagamento
+- Remoção do módulo de envio
+- Reestruturação do módulo e seus arquivos para correção do erro ao desabilitar a saída dos módulos
+- Reorganização de funções e remoção de arquivos não mais utilizados
+- Correção no envio de caracteres acentuados para o PagSeguro
+- Correção no recebimento de caracteres acentuados enviados pelo PagSeguro (*1)
+- Alteração no reenvio de informações ao PagSeguro através da página de visualização: o formulário agora é criado da mesma maneira do momento da conclusão do pedido, para que os caracteres especiais sejam enviados corretamente
+- Correção no cancelamento do pedido feito pelo retorno do PagSeguro (*1)
+- Correção/melhoria na verificação do valor total no retorno automático (*3)
+- Atualização para a nova URL de retorno do PagSeguro
+
+Alterações e correções até 23/10/2009:
+- Inclusão de um botão de pagamento na visualização do pedido, caso este não tenha sido pago
+- Alteração das informações do módulo por loja/website
+- Adição da escolha dos países disponíveis
+- Utilização do segundo campo de endereço como bairro (originalmente, era enviado um ponto de interrogação)
+- Alteração do rótulo do campo de telefone para indicar DDD
+- Melhorias na criação do pedido e da fatura
+- Adição da limpeza do carrinho de compras no momento do redirecionamento ao PagSeguro
+- Correções nos envios de emails feitos pelo módulo (notificações ao cliente)
+- Correção na confirmação do retorno automático
+- Correção no cálculo do módulo de envio
+- Correção do erro do campo de quantidade
+- Correção no envio dos preços de itens com desconto ao Pagseguro (*1)
+- Correção na duplicidade em Avançado > Avançado, nas configurações do sistema
+- Correção/melhoria na verificação do valor total no retorno automático (*2)
+
+
+
+==============================================
+Agradecimentos
+==============================================
+
+Alexandre Almeida (*1)
+Neilton C. Silva (*2)
+Igor Prado - sevenLabs (*3)
+André Luis Piccinini (*4)
+Sweet Gunner (*5)
+godsdog (*6)
+Édipo Costa Rebouças (*7)
+Sérgio Manoel Jr (*8)
+Igor Ramadas (*9)
+Evandro Fernandes (*10)
+Daiamon Bendo Paiva (*11)
+Ricardo Costa (*12)
+e toda a comunidade brasileira do Magento

@@ -1,0 +1,226 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * PagSeguro Payment Module
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ *
+ * @category   payment
+ * @package    BrunoAssarisse_PagSeguro
+ * @copyright  Copyright (c) 2010 Bruno Assarisse (www.assarisse.com.br)
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @author     Bruno Assarisse <bruno@assarisse.com.br>
+ */
+-->
+
+<config>
+	<sections>
+        <payment translate="label" module="payment">
+			<groups>
+		      	<brunoassarisse_pagseguro translate="label">
+                
+					<label>PagSeguro - Bruno Assarisse</label>
+					<sort_order>675</sort_order>
+					<show_in_default>1</show_in_default>
+				  	<show_in_website>1</show_in_website>
+				  	<show_in_store>1</show_in_store>
+                    
+                    <comment>
+                        <![CDATA[
+                        <div>
+                            Versão: 1.1.5<br />
+                            Desenvolvido por <strong>Bruno Assarisse</strong> (<a href="mailto:bruno@assarisse.com.br">bruno@assarisse.com.br</a> - <a href="http://www.assarisse.com.br/" target="_blank">www.assarisse.com.br</a>)<br />
+                            Dúvidas e Feedback: <a href="http://www.assarisse.com.br/modulo-pagseguro-para-magento/" target="_blank">www.assarisse.com.br/modulo-pagseguro-para-magento</a>
+                            <br /><br /><hr />
+                        </div>
+                        ]]>
+                    </comment>
+				  	
+					<fields>
+                    
+				      	<active translate="label">
+							<label>Enabled</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>1</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+					  		<show_in_store>1</show_in_store>
+					    </active>
+					    <title translate="label">
+					  		<label>Título</label>
+					  		<frontend_type>text</frontend_type>
+					  		<sort_order>2</sort_order>
+					  		<show_in_default>1</show_in_default>
+					  		<show_in_website>1</show_in_website>
+					  		<show_in_store>1</show_in_store>
+				      	</title>
+					    <order_status translate="label">
+							<label>Status dos novos pedidos</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_order_status_new</source_model>
+					  		<sort_order>3</sort_order>
+					  		<show_in_default>1</show_in_default>
+					  		<show_in_website>1</show_in_website>
+					  		<show_in_store>1</show_in_store>
+				      	</order_status>
+						<email_cobranca translate="label">
+							<label>Email da conta PagSeguro</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>4</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</email_cobranca>
+						<token translate="label">
+							<label>Token</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>5</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+                            <comment>Gere esse código em sua conta do PagSeguro, para ativar o retorno automático de dados.</comment>
+						</token>
+                        
+						<custom_address_model translate="label">
+						    <label>Modelo de endereço personalizado</label>
+						    <frontend_type>select</frontend_type>
+						    <source_model>adminhtml/system_config_source_yesno</source_model>
+						    <sort_order>6</sort_order>
+						    <show_in_default>1</show_in_default>
+						    <show_in_website>1</show_in_website>
+						    <show_in_store>1</show_in_store>
+                            <comment>Confira a documentação caso deseje utilizar essa opção.</comment>
+						</custom_address_model>
+						<msg_add translate="label">
+						    <label>Mensagem adicional</label>
+						    <frontend_type>textarea</frontend_type>
+						    <sort_order>10</sort_order>
+						    <show_in_default>1</show_in_default>
+						    <show_in_website>1</show_in_website>
+						    <show_in_store>1</show_in_store>
+                            <comment>O conteúdo deste campo é exibido na escolha da forma de pagamento, no fechamento dos pedidos.</comment>
+						</msg_add>
+                        
+						<installments_show translate="label">
+						    <label>Exibir parcelamento</label>
+						    <frontend_type>select</frontend_type>
+						    <source_model>adminhtml/system_config_source_yesno</source_model>
+						    <sort_order>7</sort_order>
+						    <show_in_default>1</show_in_default>
+						    <show_in_website>1</show_in_website>
+						    <show_in_store>1</show_in_store>
+                            <comment>Caso opte por exibir, configure sua conta de PagSeguro corretamente.</comment>
+						</installments_show>
+						<installments_add translate="label">
+						    <label>Parcelamento sem juros</label>
+						    <frontend_type>select</frontend_type>
+						    <source_model>BrunoAssarisse_PagSeguro_Model_Source_Installments</source_model>
+						    <sort_order>8</sort_order>
+						    <show_in_default>1</show_in_default>
+						    <show_in_website>1</show_in_website>
+						    <show_in_store>1</show_in_store>
+                            <depends><installments_show>1</installments_show></depends>
+						</installments_add>
+						<installments_upfront translate="label">
+						    <label>Desconto à vista</label>
+						    <frontend_type>select</frontend_type>
+						    <source_model>adminhtml/system_config_source_yesno</source_model>
+						    <sort_order>9</sort_order>
+						    <show_in_default>1</show_in_default>
+						    <show_in_website>1</show_in_website>
+						    <show_in_store>1</show_in_store>
+                            <depends><installments_show>1</installments_show></depends>
+                            <comment>Essa opção funciona apenas quando o parcelamento sem juros está ativado.</comment>
+						</installments_upfront>
+                        
+						<price_grouping translate="label">
+						    <label>Agrupamento de valores</label>
+						    <frontend_type>select</frontend_type>
+						    <source_model>adminhtml/system_config_source_yesno</source_model>
+						    <sort_order>10</sort_order>
+						    <show_in_default>1</show_in_default>
+						    <show_in_website>1</show_in_website>
+						    <show_in_store>1</show_in_store>
+                            <comment>Com o agrupamento, é enviado apenas um item ao carrinho de compras do PagSeguro, com o valor total da compra.</comment>
+						</price_grouping>
+						<shipping_price translate="label">
+						    <label>Preço de frete</label>
+						    <frontend_type>select</frontend_type>
+						    <source_model>BrunoAssarisse_PagSeguro_Model_Source_ShippingPrice</source_model>
+						    <sort_order>11</sort_order>
+						    <show_in_default>1</show_in_default>
+						    <show_in_website>1</show_in_website>
+						    <show_in_store>1</show_in_store>
+                            <comment>Escolha como o preço do frete será enviado ao carrinho de compras do PagSeguro.</comment>
+						</shipping_price>
+                        
+						<use_return_page_cms translate="label">
+						    <label>Utilizar página do CMS como retorno</label>
+						    <frontend_type>select</frontend_type>
+						    <source_model>adminhtml/system_config_source_yesno</source_model>
+						    <sort_order>12</sort_order>
+						    <show_in_default>1</show_in_default>
+						    <show_in_website>1</show_in_website>
+						    <show_in_store>1</show_in_store>
+                            <comment>Por padrão, o módulo utiliza uma página de sucesso personalizada.</comment>
+						</use_return_page_cms>
+						<return_page translate="label">
+						    <label>Página CMS de retorno</label>
+						    <frontend_type>select</frontend_type>
+						    <source_model>BrunoAssarisse_PagSeguro_Model_Source_ReturnPage</source_model>
+						    <sort_order>13</sort_order>
+						    <show_in_default>1</show_in_default>
+						    <show_in_website>1</show_in_website>
+						    <show_in_store>1</show_in_store>
+                            <depends><use_return_page_cms>1</use_return_page_cms></depends>
+						</return_page>
+                        
+						<use_curl translate="label">
+						    <label>Utilizar cURL</label>
+						    <frontend_type>select</frontend_type>
+						    <source_model>adminhtml/system_config_source_yesno</source_model>
+						    <sort_order>14</sort_order>
+						    <show_in_default>1</show_in_default>
+						    <show_in_website>1</show_in_website>
+						    <show_in_store>1</show_in_store>
+						</use_curl>
+                        
+                        <allowspecific translate="label">
+                            <label>Pagamento de países permitidos</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>50</sort_order>
+                            <source_model>adminhtml/system_config_source_payment_allspecificcountries</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </allowspecific>
+                        <specificcountry translate="label">
+                            <label>Pagamento de países específicos</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <sort_order>55</sort_order>
+                            <source_model>adminhtml/system_config_source_country</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><allowspecific>1</allowspecific></depends>
+                        </specificcountry>
+						<sort_order translate="label">
+						    <label>Sort order</label>
+						    <frontend_type>text</frontend_type>
+						    <sort_order>100</sort_order>
+						    <show_in_default>1</show_in_default>
+						    <show_in_website>1</show_in_website>
+						    <show_in_store>1</show_in_store>
+						</sort_order>
+                        
+			  	     </fields>
+                </brunoassarisse_pagseguro>
+            </groups>
+		</payment>
+	</sections>
+</config>

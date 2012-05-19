@@ -1,0 +1,77 @@
+<?php
+/**
+ * PagSeguro Payment Module
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ *
+ * @category   design
+ * @package    BrunoAssarisse_PagSeguro
+ * @copyright  Copyright (c) 2010 Bruno Assarisse (www.assarisse.com.br)
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @author     Bruno Assarisse <bruno@assarisse.com.br>
+ */
+?>
+
+<?php if ($this->getOrderId()):?>
+
+<div class="page-title">
+    <h1>Pedido inclu&iacute;do com sucesso!</h1>
+</div>
+
+<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+
+<p>
+    <?php
+    if ($this->getCanViewOrder()) {
+        $order_link_msg = $this->__('Your order # is: %s', sprintf('<a href="%s">%s</a>', $this->escapeHtml($this->getViewOrderUrl()), $this->escapeHtml($this->getOrderId())));
+    } else {
+        $order_link_msg = $this->__('Your order # is: %s', $this->escapeHtml($this->getOrderId()));
+    }
+    ?>
+    <strong><br /><?php echo $order_link_msg; ?>.</strong>
+    <?php if ($this->getPagseguroTransactionId()):?>
+    <br />
+    <strong>ID da transação PagSeguro:</strong> <?php echo $this->getPagseguroTransactionId();?>
+    <?php endif; ?>
+</p>
+    <?php if ($this->getCanPrintOrder()):?>
+<p><?php echo $this->__('Click <a href="%s" onclick="this.target=\'_blank\'">here to print</a> a copy of your order confirmation.', $this->getPrintUrl()) ?></p>
+    <?php endif; ?>
+
+<p><br />Uma mensagem com os detalhes desta transação foi enviada para o seu email. Você pode também acessar sua conta <strong>PagSeguro</strong> no endereço <a href="https://pagseguro.uol.com.br/" onclick="this.target='_blank'">https://pagseguro.uol.com.br</a> para mais informações.</p>
+
+<?php if ($this->getPagseguroTransactionId()):?>
+    <?php if ($this->getIsOrderHolded()):?>
+        <p>
+        <?php if ($this->getPagseguroPaymentMethod() == 'Boleto'):?>
+            Por ter escolhido pagar por <strong>boleto bancário</strong>, basta <a href="<?php echo $this->getPagseguroBoletoUrl(); ?>" onclick="this.target='_blank'">imprimi-lo</a> e efetuar o pagamento que nosso sistema se encarregará do restante.
+        <?php else: ?>
+            Assim que seu pagamento for confirmado pelo PagSeguro, o pedido será enviado.
+        <?php endif;?>
+        </p>
+    <?php endif;?>
+<?php else: ?>
+    <p>Clique <a href="<?php echo $this->getPagseguroPaymentUrl(); ?>">aqui para pagar</a> seu pedido.</p>
+<?php endif;?>
+
+<p><strong><?php echo $this->__('Thank you for your purchase!') ?></strong></p>
+
+<?php else:?>
+
+<div class="page-title">
+    <h1>Erro</h1>
+</div>
+
+<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+
+<p>Pedido não encontrado.</p>
+
+<?php endif;?>
+
+<div class="buttons-set">
+    <button type="button" class="button" title="<?php echo $this->__('Continue Shopping') ?>" onclick="window.location='<?php echo $this->getUrl() ?>'"><span><span><?php echo $this->__('Continue Shopping') ?></span></span></button>
+</div>

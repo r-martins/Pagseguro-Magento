@@ -1,0 +1,28 @@
+<?php
+/**
+ * PagSeguro Payment Module
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ *
+ * @category   design
+ * @package    BrunoAssarisse_PagSeguro
+ * @copyright  Copyright (c) 2010 Bruno Assarisse (www.assarisse.com.br)
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @author     Bruno Assarisse <bruno@assarisse.com.br>
+ */
+    
+if ($this->getShowMessage()): ?>
+
+        <div style="overflow:hidden;">
+        <fieldset class="form-list">
+            <ul id="payment_form_<?php echo $this->getMethodCode(); ?>" style="display:none;">
+                <li><?php echo $this->getMessage(); ?></li>
+            </ul>
+        </fieldset>
+        </div>
+
+<?php endif; ?>

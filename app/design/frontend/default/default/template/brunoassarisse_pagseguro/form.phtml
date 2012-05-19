@@ -1,0 +1,111 @@
+<?php
+/**
+ * PagSeguro Payment Module
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ *
+ * @category   design
+ * @package    BrunoAssarisse_PagSeguro
+ * @copyright  Copyright (c) 2010 Bruno Assarisse (www.assarisse.com.br)
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @author     Bruno Assarisse <bruno@assarisse.com.br>
+ */
+    
+if ($this->getShowForm()): ?>
+
+        <fieldset class="form-list">
+            <ul id="payment_form_<?php echo $this->getMethodCode(); ?>" style="display:none;">
+                <?php if ($this->getShowMessage()): ?>
+                <li><?php echo $this->getMessage(); ?></li>
+                <?php endif; ?>
+                <?php if ($this->getShowInstallments()): ?>
+                <li>
+                    <script type="text/javascript" >
+                    function switch_installments() {
+                        var installments_area = document.getElementById('installments_area');
+                        var installments_keyword = document.getElementById('installments_keyword');
+                        
+                        if (installments_area.style.display == 'none') {
+                            installments_area.style.display = 'block';
+                            installments_keyword.innerHTML = 'Ocultar';
+                        } else {
+                            installments_area.style.display = 'none';
+                            installments_keyword.innerHTML = 'Visualizar';
+                        }
+                        
+                        return false;
+                    }
+                    </script>
+                    <a href="#" onclick="return switch_installments();"><span id="installments_keyword">Visualizar</span> simulação de pagamentos</a>
+                </li>
+                <li id="installments_area" style="display: none;">
+                    <style type="text/css">
+                    #installments_table th, #installments_table td {
+                        padding: 1px 15px;
+                        text-align: left;
+                        white-space: nowrap;
+                    }
+                    #installments_table th {
+                        background-color: #F0F0F0;
+                        font-weight: bold;
+                        text-align: center;
+                    }
+                    #installments_table td {
+                        border-top: 1px solid #999999;
+                        text-align: left;
+                        font-size: 11px;
+                    }
+                    #installments_table tr:hover td {
+                        background-color: #F7F7F7;
+                    }
+                    #installments_table .first_col {
+                        text-align: center;
+                    }
+                    #installments_table .highlight_col {
+                        padding: 1px 15px 15px;
+                        font-size: 13px;
+                    }
+                    #installments_table .subtitle_line th {
+                        font-weight: normal;
+                    }
+                    </style>
+                    <table id="installments_table">
+                        <?php if ($this->getShowUpfrontPrice()): ?>
+                        <tr>
+       					    <th colspan="4">Pagamento à vista (boleto, TEF ou saldo PagSeguro)</th>
+    				    </tr>
+        				<tr>
+       					    <td colspan="4" class="highlight_col">R$ <?php echo $this->getUpfrontPrice(); ?> (<?php echo $this->getUpfrontDiscount(); ?>% de desconto)</td>
+        				</tr>
+                        <?php endif; ?>
+        				<tr>
+        					<th colspan="4">Cartão de crédito</th>
+        				</tr>
+        				<tr class="subtitle_line">
+        					<th>Parcelas</th>
+        					<th>Valor da parcela</th>
+        					<th>Total</th>
+        					<th></th>
+        				</tr>
+                        <?php
+                        $installments = $this->getInstallments();
+                        foreach ($installments as $parcels => $installment): ?>
+                            
+        				<tr>
+        					<td class="first_col"><?php echo $parcels + 1; ?></td>
+        					<td>R$ <?php echo $installment['valor_parcela']; ?></td>
+        					<td>R$ <?php echo $installment['valor_total']; ?></td>
+        					<td><?php echo $installment['msg_extra']; ?></td>
+        				</tr>
+                        <?php endforeach; ?>
+                    </table>
+                </li>
+                <?php endif; ?>
+            </ul>
+        </fieldset>
+
+<?php endif; ?>

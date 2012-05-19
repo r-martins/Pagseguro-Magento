@@ -1,0 +1,128 @@
+<?php
+/**
+ * PagSeguro Payment Module
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ *
+ * @category   design
+ * @package    BrunoAssarisse_PagSeguro
+ * @copyright  Copyright (c) 2010 Bruno Assarisse (www.assarisse.com.br)
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @author     Bruno Assarisse <bruno@assarisse.com.br>
+ */
+ ?>
+    
+<?php if ($this->getShowInstallmentsScripts()): ?>
+    <script type="text/javascript">
+        var price_innerhtml;
+        function updateInstallments() {
+            var value = $$('.product-shop>.price-box .price')[0].innerHTML;
+            
+            if (value != price_innerhtml) {
+                price_innerhtml = value;
+                
+                if ($('installments_table')) {
+                    $('installments_table').setStyle({visibility: 'hidden'});
+                    $('installments_loading').setStyle({position: 'absolute'});
+                } else {
+                    $('installments_loading').setStyle({position: 'relative'});
+                }
+                $('installments_loading').setStyle({display: 'inline'});
+                new Ajax.Updater('installments_area', '<?php echo Mage::getBaseUrl(); ?>pagseguro/pay/installments/price/'+value, {
+                    method: 'get',
+                    evalScripts: true,
+                    onComplete: hideInstallmentsLoading
+                });
+            }
+        }
+        
+        function hideInstallmentsLoading () {
+            $('installments_loading').setStyle({display: 'none'});
+        }
+        
+        Event.observe(window, 'load', function() {
+            price_innerhtml = $$('.price')[0].innerHTML;
+            $$('#product-options-wrapper select, #product-options-wrapper input[type=text]').each( function(e) {
+                Event.observe(e, 'change', updateInstallments);  
+            });
+        });
+    </script>
+
+    <style type="text/css">
+        #installments_loading {
+            padding: 20px 12px;
+            font-size: 13px;
+            font-weight: bold;
+            text-align: center;
+        }
+        #installments_table th, #installments_table td {
+            padding: 1px 12px;
+            text-align: left;
+            white-space: nowrap;
+        }
+        #installments_table th {
+            background-color: #F0F0F0;
+            font-weight: bold;
+            text-align: center;
+        }
+        #installments_table td {
+            border-top: 1px solid #999999;
+            text-align: left;
+            font-size: 11px;
+        }
+        #installments_table tr:hover td {
+            background-color: #F7F7F7;
+        }
+        #installments_table .first_col {
+            text-align: center;
+        }
+        #installments_table .highlight_col {
+            padding: 1px 12px 12px;
+            font-size: 13px;
+        }
+        #installments_table .subtitle_line th {
+            font-weight: normal;
+        }
+    </style>
+    <div id="installments_loading" style="display: none;">(Carregando parcelamento...)</div>
+    <div id="installments_area">
+<?php endif; // $this->getShowInstallmentsScripts() ?>
+<?php if ($this->getShowInstallments()): ?>
+        <table id="installments_table">
+                        <?php if ($this->getShowUpfrontPrice()): ?>
+                        <tr>
+       					    <th colspan="4">Pagamento à vista (boleto, TEF ou saldo PagSeguro)</th>
+    				    </tr>
+        				<tr>
+       					    <td colspan="4" class="highlight_col">R$ <?php echo $this->getUpfrontPrice(); ?> (<?php echo $this->getUpfrontDiscount(); ?>% de desconto)</td>
+        				</tr>
+                        <?php endif; ?>
+        				<tr>
+        					<th colspan="4">Cartão de crédito</th>
+        				</tr>
+        				<tr class="subtitle_line">
+        					<th>Parcelas</th>
+        					<th>Valor da parcela</th>
+        					<th>Total</th>
+        					<th></th>
+        				</tr>
+                        <?php
+                        $installments = $this->getInstallments();
+                        foreach ($installments as $parcels => $installment): ?>
+                            
+        				<tr>
+        					<td class="first_col"><?php echo $parcels + 1; ?></td>
+        					<td>R$ <?php echo $installment['valor_parcela']; ?></td>
+        					<td>R$ <?php echo $installment['valor_total']; ?></td>
+        					<td><?php echo $installment['msg_extra']; ?></td>
+        				</tr>
+                        <?php endforeach; ?>
+        </table>
+<?php endif; // $this->getShowInstallments() ?>
+<?php if ($this->getShowInstallmentsScripts()): ?>
+    </div>
+<?php endif; ?>
