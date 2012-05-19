@@ -7,4 +7,4 @@ Agora você pode fazer fork do repositório, realizar suas alterações e contri
 
 Documentação original e instruções de instalação: http://www.assarisse.com.br/modulo-pagseguro-para-magento/
 
-*Publicado publicamente com autorização do autor.
+*Publicado com autorização do autor.
